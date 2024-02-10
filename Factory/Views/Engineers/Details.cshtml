@@ -1,0 +1,77 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+@using Factory.Models
+
+<div class="row">
+  <div class="card col-sm-8 mx-auto p-3" style="width: 30rem">
+    <h2>Engineer Details</h2>
+    <hr />
+    <div>
+      <h3>@Html.DisplayFor(model => model.Name)</h3>
+      <h4>@Html.DisplayNameFor(model => model.Phone): @Html.DisplayFor(model => model.Phone)</h4>
+      <h4>Date Hired: @Html.DisplayFor(model => model.HireDate)</h4>
+    </div>
+  </div>
+</div>
+<hr />
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This Engineer has not displayed any machines yet.</p>
+}
+else
+{
+  <h4>This restaurant offers the following meal services: </h4>
+  <ul>
+    @foreach(RestaurantService join in Model.JoinEntities)
+    {
+      <li>@join.Service.Type</li>
+      @using (Html.BeginForm("DeleteJoin", "Restaurants"))
+      {
+        @Html.Hidden("joinId", @join.RestaurantServiceId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+}
+@if (@Model.JoinEntity.Count == 0 || @Model.JoinEntity == null)
+{
+  <p>This restaurant has no days or hours attached yet</p>
+}
+else
+{
+  <h4>This restaurant has the following schedule: </h4>
+  <ul>
+    @foreach (DayRestaurant join in Model.JoinEntity)
+    {
+      <li>Day: @join.Day.Name | Time: @join.Day.Time</li>
+    }
+  </ul>
+}
+
+<hr />
+<div class="mx-5">
+<h3>Reviews</h3>
+@if (@Model.Reviews.Count == 0)
+{
+  <h3>No reviews have been added yet..</h3>
+}
+else
+{
+  <ul>
+  @foreach (Review review in Model.Reviews)
+  {
+    <li>@Html.ActionLink($"{review.Feedback}", "Details", "Reviews", new { id = review.ReviewId })</li>
+  }
+  </ul>
+}
+</div>
+<hr />
+<p>@Html.ActionLink("Add a Service", "AddService", new { id = Model.RestaurantId })</p>
+<p>@Html.ActionLink("Add a day", "AddDay", new { id = Model.RestaurantId })</p>
+
+<button>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId })</button>
+<button>@Html.ActionLink("Delete", "Delete", new { id = Model.RestaurantId })</button>
+<button>@Html.ActionLink("Add Review", "Create", "Reviews")</button>

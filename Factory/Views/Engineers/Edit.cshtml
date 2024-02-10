@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+
+<h4>Edit for: "@Model.Name"</h4>
+<hr />
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+  <br />
+  @Html.LabelFor(model => model.Phone)
+  @Html.EditorFor(model => model.Phone)
+  <br />
+  @Html.LabelFor(model => model.Renewal, "Licence Renewal Date")
+  @Html.EditorFor(model => model.Renewal, new { @type = "date" })
+  <br />
+  <input type="submit" value="add to system" />
+}

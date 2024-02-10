@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Machine
+
+<h4>Edit for: "@Model.Name"</h4>
+<hr />
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+  <br />
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
+  <br />
+   @Html.LabelFor(model => model.Inspection, "Inspection Date")
+  @Html.EditorFor(model => model.Inspection, new { htmlAttributes = new { @type = "date" } })
+  <br />
+  <label for="status">Status</label>
+  <select name="status" id="status">
+    <option value="operational">Operational</option>
+    <option value="malfunctioning">Malfunctioning</option>
+    <option value="inRepair">In for Repairs</option>
+  </select>
+  <br />
+  <input type="submit" value="add to system" />
+}
