@@ -3,19 +3,31 @@
 }
 @model Factory.Models.Engineer
 
-<h2>Add a Machine</h2>
+<h2>Add a DreamWorks Mirage Machine</h2>
 <hr />
-<h4>Choose a machine to add to this engineer: @Html.DisplayFor(model => model.Name)</h4>
+<h4>Choose a machine to add to this Dream Weaver: "@Html.DisplayFor(model => model.Name)"</h4>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.EngineerId)
 
-  @Html.Label("Select a machine")
-  @foreach (var machine in ViewBag.Machines as List<Factory.Models.Machine>)
+  @if (ViewBag.Machines.Count == 0)
   {
-    @Html.DropDownList("MachineId")
+    <p>No DreamWork machines are currently in the system...</p>
+    <p>You can add one @Html.ActionLink("here", "Create", "Machines")</p>
   }
-
+  else
+  {
+    @Html.Label("Select machine(s)")
+    @foreach (var machine in ViewBag.Machines as List<Factory.Models.Machine>)
+    {
+      <div>
+        <input type="checkbox" id="@("MachineId_" + machine.MachineId)" name="MachineId" value="@machine.MachineId" />
+        <label for="@("MachineId_" + machine.MachineId)">@machine.Name</label>
+      </div>
+    }
+  }
   <input type="submit" value="Save" />
+}
+
 }

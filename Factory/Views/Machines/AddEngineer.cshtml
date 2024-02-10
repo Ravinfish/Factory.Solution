@@ -3,7 +3,7 @@
 }
 @model Factory.Models.Machine
 
-<h2>Add an engineer</h2>
+<h2>Add a Dream Weaver to "@Html.DisplayFor(model => model.Name)"</h2>
 <hr />
 <h4>Choose a Engineer to add to this machine: @Html.DisplayFor(model => model.Name)</h4>
 
@@ -11,11 +11,15 @@
 {
   @Html.HiddenFor(model => model.MachineId)
 
-  @Html.Label("Select an Engineer")
-  @foreach (var engineer in ViewBag.Engineers as List<Factory.Models.Engineer>)
+  @if (ViewBag.EngineerId == null)
   {
-    @Html.DropDownList("EngineerId")
+    <p>No Dream Weavers are in our system</p>
+    <p>You can add a new Dream Weaver @Html.ActionLink("here", "Create", "Engineers")</p>
   }
-
-  <input type="submit" value="Save" />
+  else
+  {
+    @Html.Label("Select a Dream Weaver")
+    @Html.DropDownList("EngineerId")
+    <input type="submit" value="Save" />
+  }
 }
