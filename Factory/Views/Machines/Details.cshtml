@@ -1,0 +1,47 @@
+@{
+  Layout = " _Layout";
+}
+@model Factory.Models.Machine
+@using Factory.Models
+
+
+<div class="row">
+  <div class="card col-sm-8 mx-auto p-3" style="width: 30rem">
+    <h2>DreamWorks Machine Details:</h2>
+    <hr />
+    <div>
+      <h3>@Html.DisplayFor(model => model.Name)</h3>
+      <h4>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h4>
+      <h4>Installed: @Html.DisplayFor(model => model.InstallDate)</h4>
+      <h4>Inspected: @Html.DisplayFor(model => model.Inspection)</h4>
+      <h4>@Html.DisplayNameFor(model => model.Status): @Html.DisplayFor(model => model.Status)</h4>
+    </div>
+  </div>
+</div>
+<hr />
+@if (@Model.JoinEntities.Count == 0)
+{
+  <p>This machine is not assigned to any Dream Weavers.</p>
+}
+else
+{
+  <h4>Dream Weavers assigned: </h4>
+  <ul>
+    @foreach (EngineerMachine join in Model.JoinEntities)
+    {
+      <li>@join.Engineer.Name</li>
+      @using (Html.BeginForm("DeleteJoin", "Machines"))
+      {
+        @Html.Hidden("joinId", @join.EngineerMachineId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+
+}
+<hr />
+<p>@Html.ActionLink("Add a machine", "Create")</p>
+<p>@Html.ActionLink("Update Details ", "Edit", new { id = Model.MachineId })</p>
+<p>@Html.ActionLink("Delete", "Delete", new { id = Model.MachineId })</p>
+
+<p>@Html.ActionLink("Add a Dream Weaver", "AddEngineer", new { id = Model.MachineId })</p>
