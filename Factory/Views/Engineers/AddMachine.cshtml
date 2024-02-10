@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Engineer
+
+<h2>Add a Machine</h2>
+<hr />
+<h4>Choose a machine to add to this engineer: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.EngineerId)
+
+  @Html.Label("Select a machine")
+  @foreach (var machine in ViewBag.Machines as List<Factory.Models.Machine>)
+  {
+    @Html.DropDownList("MachineId")
+  }
+
+  <input type="submit" value="Save" />
+}
