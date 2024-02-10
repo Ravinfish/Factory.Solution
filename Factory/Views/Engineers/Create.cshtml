@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BestRestaurants.Models.Engineer
+
+<h4>Add an Engineer</h4>
+<hr />
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+  <br />
+  @Html.LabelFor(model => model.Phone)
+  @Html.TextBoxFor(model => model.Phone)
+  <br />
+  @Html.LabelFor(model => model.Renewal, "Licence Renewal Date")
+  @Html.TextBoxFor(model => model.Renewal, new { @type = "date" })
+  <br />
+  <input type="submit" value="add to system" />
+}
