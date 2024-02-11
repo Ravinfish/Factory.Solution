@@ -4,7 +4,7 @@
 
 namespace Factory.Migrations
 {
-    public partial class AddUpdate : Migration
+    public partial class AddAllFilesPriority : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

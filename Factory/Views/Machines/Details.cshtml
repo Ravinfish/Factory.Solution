@@ -1,23 +1,20 @@
 @{
-  Layout = " _Layout";
+  Layout = "_Layout";
 }
+
 @model Factory.Models.Machine
 @using Factory.Models
 
 
-<div class="row">
-  <div class="card col-sm-8 mx-auto p-3" style="width: 30rem">
-    <h2>DreamWorks Machine Details:</h2>
-    <hr />
-    <div>
-      <h3>@Html.DisplayFor(model => model.Name)</h3>
-      <h4>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h4>
-      <h4>Installed: @Html.DisplayFor(model => model.InstallDate)</h4>
-      <h4>Inspected: @Html.DisplayFor(model => model.Inspection)</h4>
-      <h4>@Html.DisplayNameFor(model => model.Status): @Html.DisplayFor(model => model.Status)</h4>
-    </div>
-  </div>
-</div>
+<h2>DreamWorks Machine Details:</h2>
+<hr />
+
+<h3>@Html.DisplayFor(model => model.Name)</h3>
+<h4>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h4>
+<h4>Installed: @Html.DisplayFor(model => model.InstallDate)</h4>
+<h4>Inspected: @Html.DisplayFor(model => model.Inspection)</h4>
+<h4>@Html.DisplayNameFor(model => model.Status): @Html.DisplayFor(model => model.Status)</h4>
+
 <hr />
 @if (@Model.JoinEntities.Count == 0)
 {
@@ -30,11 +27,11 @@ else
     @foreach (EngineerMachine join in Model.JoinEntities)
     {
       <li>@join.Engineer.Name</li>
-      @using (Html.BeginForm("DeleteJoin", "Machines"))
+      @* @using (Html.BeginForm("DeleteJoin", "Machines"))
       {
         @Html.Hidden("joinId", @join.EngineerMachineId)
         <input type="submit" value="Delete" />
-      }
+      } *@
     }
   </ul>
 

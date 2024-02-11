@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Factory.Migrations
 {
     [DbContext(typeof(FactoryContext))]
-    [Migration("20240210012917_Initial")]
-    partial class Initial
+    [Migration("20240211203201_AddAllFilesPriority")]
+    partial class AddAllFilesPriority
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
