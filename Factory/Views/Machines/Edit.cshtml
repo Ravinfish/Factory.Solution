@@ -9,6 +9,8 @@
 
 @using (Html.BeginForm())
 {
+  @Html.HiddenFor(model => model.MachineId)
+
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
   <br />
@@ -25,5 +27,5 @@
     <option value="inRepair">In for Repairs</option>
   </select>
   <br />
-  <input type="submit" value="add to system" />
+  <input type="submit" value="Update" />
 }
